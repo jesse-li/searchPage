@@ -5,6 +5,8 @@
 				<a :class="[$index==result.news.data.length-1?'last':'']" href="{{onews.url}}" target="_blank">
 					<h5>{{onews.title}}</h5>
 					<p>{{onews.date}}</p>
+					<p><span>comments:<em v-text="onews.comments"></em></span><span>likes:<em v-text="onews.likes"></em></span><span>views:<em v-text="onews.views"></em></span></p>
+					<p><span>相关度:<em v-text="onews.esscore"></em></span><span>热度:<em v-text="onews.hot_coefficient | tofixed"></em></span></p>
 				</a>
 			</li>
 		</ul>
@@ -31,6 +33,10 @@ import modelObj from "../js/modelObj.js";
 				console.log(response)
 			})
 		},
-		props:["searchVal"]
+		props:["searchVal"],
+		filters:{
+			tofixed:modelObj.tofixed
+		}
+		
 	}
 </script>

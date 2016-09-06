@@ -7,7 +7,8 @@ module.exports={
 	output:{
 		path:path.join(__dirname,"./dist"),
 		filename:"[name].js",
-		publicPath:"dist/"
+		publicPath:"dist/",
+		chunkFilename : '[name].js'
 	},
 	// 服务器配置相关，自动刷新!
     devServer: {

@@ -106,12 +106,19 @@
         p{
             color: #999;
             padding-top: 4px;
+            span{
+                padding-right: 8px;
+                em{
+                    color: #139cea;
+                }
+            }
         }
     }
     .video-list{
         padding: 0 4%;
         a{
             display: flex;
+            align-items: center;
             padding: 10px 0;
             border-bottom: 1px solid #e9e9e9;
             &.last{
@@ -147,6 +154,12 @@
                 p{
                     color: #999;
                     padding-top: 8px;
+                    span{
+                        padding-right: 8px;
+                        em{
+                            color: #139cea;
+                        }
+                    }
                 }
             }
         }
