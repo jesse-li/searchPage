@@ -3,6 +3,7 @@ import "../css/common.scss";
 import Vue from "vue";
 import $Ajax from "vue-resource";
 import VueRouter from "vue-router";
+import modelObj from "./modelObj.js"
 Vue.use(VueRouter);
 
 /*import app from "../vue/app.vue";
@@ -32,7 +33,8 @@ router.map({
    			},"test/listvideo")
    		}
     },
-    "/index":{
+    "/index/:rId/:hot":{
+    	name:"index",
     	component: function(resolve){
    			/*require(['../vue/app.vue'], resolve)*/
    			require.ensure(['../vue/app.vue'],function(require){
@@ -42,6 +44,18 @@ router.map({
     }
 });
 router.redirect({
-  "*": '/index'
+  "*": '/index/4462/1'
+});
+router.beforeEach(function (transition) {
+	if(transition.from.params&&transition.from.params.rId){
+		console.log("from"+" "+transition.from.params)
+		modelObj.rId = transition.from.params.rId;
+		modelObj.hot = transition.from.params.hot == "0"?false:true;
+	}else{
+		console.log("to"+" "+transition.to.params)
+		modelObj.rId = transition.to.params.rId;
+		modelObj.hot = transition.to.params.hot == "0"?false:true;
+	}
+	transition.next();
 })
 router.start(App, "#app");

@@ -7,7 +7,7 @@
 					<i class="bg"></i>
 				</div>
 				<div class="video-info">
-					<h5>{{ovideo.title}}</h5>
+					<h5>{{{ovideo.title | hightLight search}}}</h5>
 					<p>{{ovideo.date}}</p>
 					<p><span>comments:<em v-text="ovideo.comments"></em></span><span>likes:<em v-text="ovideo.likes"></em></span><span>views:<em v-text="ovideo.views"></em></span></p>
 					<p><span>相关度:<em v-text="ovideo.esscore"></em></span><span>热度:<em v-text="ovideo.hot_coefficient | tofixed"></em></span></p>
@@ -21,13 +21,14 @@ import modelObj from "../js/modelObj.js";
 	export default{
 		data(){
 			return {
-				result:{}
+				result:{},
+				search:modelObj.search
 			}
 		},
 		created(){
 			let that = this;
 			console.log(that)
-			let url = "http://3g.d.cn/api/game/search.json?id="+reId+"&keyword="+modelObj.search+"&type=video"+"&isHot="+hot;
+			let url = "http://3g.d.cn/api/game/search.json?id="+modelObj.rId+"&keyword="+modelObj.search+"&type=video"+"&isHot="+modelObj.hot;
 			that.$http.jsonp(url).then((response)=>{
 				// success
 				//alert("ok")
@@ -39,7 +40,8 @@ import modelObj from "../js/modelObj.js";
 			})
 		},
 		filters:{
-			tofixed:modelObj.tofixed
+			tofixed:modelObj.tofixed,
+			hightLight:modelObj.hightLight
 		}
 	}
 </script>

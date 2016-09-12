@@ -1,3 +1,6 @@
+i.red{
+    color: red;
+}
 .bg,.line>div>h4:before{
         background-image: url(../img/icon.png);
         background-size: 80px auto;
@@ -67,20 +70,46 @@
             align-items: center;
             padding-top: 10px;
             >img{
+                display: block;
                 width: 35px;
                 height: 35px;
                 border-radius: 8px;
             }
-            >p{
+            >section{
                 flex: 1;
                 margin-left: 10px;
+                width: 80%;
+                border-bottom: 1px solid #e9e9e9;
+                &.last{
+                    border: 0;
+                }
+                p{
                 padding: 6px 0;
                 line-height: 35px;
                 font-size: 15px;
                 color: #333;
-                border-bottom: 1px solid #e9e9e9;
-                &.last{
-                    border: 0;
+                }
+                &>div{
+                    span{
+                        width: 50%;
+                        display: inline-block;
+                        height: 22px;
+                        overflow: hidden;
+                        i{
+                            display: inline-block;
+                            width: 48%;
+                            line-height: 20px;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                           &:first-child{
+                               border: 1px solid;
+                           }
+                           &:last-child{
+                               border: 1px solid red;
+                           }
+                        }
+                    }
                 }
             }
         }

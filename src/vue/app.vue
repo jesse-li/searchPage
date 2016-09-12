@@ -12,7 +12,7 @@ import modelObj from "../js/modelObj.js";
 				this.searchVal = modelObj.search;
 			}
 			//console.log(modelObj.search)
-			
+			//console.log($route.params.rId)
 		},
 		watch:{
 			'searchVal':function(val,oldVal){
@@ -24,7 +24,7 @@ import modelObj from "../js/modelObj.js";
 			fetch:function(now,old){
 				console.log("search is old:"+old+" search is now:"+now);
 				let that = this;
-				let url = "http://3g.d.cn/api/game/search.json?id="+reId+"&keyword="+that.searchVal+"&isHot="+hot;
+				let url = "http://3g.d.cn/api/game/search.json?id="+modelObj.rId+"&keyword="+that.searchVal+"&isHot="+modelObj.hot;
 				that.$http.jsonp(url).then((response)=>{
 					// success
 					//alert("ok")
@@ -47,7 +47,8 @@ import modelObj from "../js/modelObj.js";
 			}
 		},
 		filters:{
-			tofixed:modelObj.tofixed
+			tofixed:modelObj.tofixed,
+			hightLight:modelObj.hightLight
 		}
 	}
 </script>
@@ -66,7 +67,12 @@ import modelObj from "../js/modelObj.js";
 				<li v-for="odb in result.db.data">
 					<a target="_blank" class="clearfix" :href="odb.url">
 						<img class="fl" :src="odb.img"/>
-						<p :class="[$index==result.db.data.length-1?'last':'']" class="fr">{{odb.title}}</p>
+						<section :class="[$index==result.db.data.length-1?'last':'']" class="fr">
+							<p>{{{odb.title | hightLight searchVal}}}</p>
+							<div>
+								<span v-if="index<4" v-for="(index,attr) in odb.attrs"><i>{{attr.key}}:</i><i>{{attr.value}}</i></span>
+							</div>
+						</section>
 					</a>
 					
 				</li>
@@ -80,7 +86,7 @@ import modelObj from "../js/modelObj.js";
 			<ul class="news-list">
 				<li v-if="$index<5" v-for="onews in result.news.data">
 					<a :class="[$index==result.news.data.length-1||$index==4?'last':'']" href="{{onews.url}}" target="_blank">
-						<h5>{{onews.title}}</h5>
+						<h5>{{{onews.title | hightLight searchVal}}}</h5>
 						<p>{{onews.date}}</p>
 						<p><span>comments:<em v-text="onews.comments"></em></span><span>likes:<em v-text="onews.likes"></em></span><span>views:<em v-text="onews.views"></em></span></p>
 						<p><span>相关度:<em v-text="onews.esscore"></em></span><span>热度:<em v-text="onews.hot_coefficient | tofixed"></em></span></p>
@@ -101,7 +107,7 @@ import modelObj from "../js/modelObj.js";
 							<i class="bg"></i>
 						</div>
 						<div class="video-info">
-							<h5>{{ovideo.title}}</h5>
+							<h5>{{{ovideo.title | hightLight searchVal}}}</h5>
 							<p>{{ovideo.date}}</p>
 							<p><span>comments:<em v-text="ovideo.comments"></em></span><span>likes:<em v-text="ovideo.likes"></em></span><span>views:<em v-text="ovideo.views"></em></span></p>
 							<p><span>相关度:<em v-text="ovideo.esscore"></em></span><span>热度:<em v-text="ovideo.hot_coefficient | tofixed"></em></span></p>
