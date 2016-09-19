@@ -7,7 +7,7 @@
 					<i class="bg"></i>
 				</div>
 				<div class="video-info">
-					<h5>{{{ovideo.title | hightLight search}}}</h5>
+					<h5>{{{ovideo.title}}}</h5>
 					<p>{{ovideo.date}}</p>
 					<p><span>comments:<em v-text="ovideo.comments"></em></span><span>likes:<em v-text="ovideo.likes"></em></span><span>views:<em v-text="ovideo.views"></em></span></p>
 					<p><span>相关度:<em v-text="ovideo.esscore"></em></span><span>热度:<em v-text="ovideo.hot_coefficient | tofixed"></em></span></p>
